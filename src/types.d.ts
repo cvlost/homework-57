@@ -4,9 +4,13 @@ export const ROLES = [
   'admin',
 ] as const;
 
-export interface User {
+export interface UserFields {
   name: string;
   email: string;
   isActive: boolean;
   role: typeof ROLES[number];
+}
+
+export interface UserData extends UserFields {
+  id: string;
 }

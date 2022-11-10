@@ -1,18 +1,25 @@
 import React, {useState} from 'react';
-import type {User} from "../../types";
+import type {UserFields, UserData} from "../../types";
 import {ROLES} from "../../types";
+import {uID} from "../../lib/uID";
 
-const UserForm = () => {
-  const [fields, setFields] = useState<User>({
+interface Props {
+  onSubmit: (userData: UserData) => void;
+}
+
+const UserForm: React.FC<Props> = ({onSubmit}) => {
+  const defaultFields: UserFields = {
     name: '',
     email: '',
     isActive: false,
     role: 'user'
-  });
+  }
+  const [fields, setFields] = useState<UserFields>({...defaultFields});
 
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('onFromSubmit')
+    onSubmit({...fields, id: uID()});
+    setFields(() => ({...defaultFields}))
   };
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +54,7 @@ const UserForm = () => {
           value={fields.name}
           className="form-control"
           onChange={onInputChange}
+          required
         />
       </div>
       <div className="input-group mb-3">
@@ -58,6 +66,7 @@ const UserForm = () => {
           value={fields.email}
           className="form-control"
           onChange={onInputChange}
+          required
         />
       </div>
       <div className="input-group mb-3">
