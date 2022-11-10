@@ -21,7 +21,7 @@ const UserItem: React.FC<Props> = (props) => {
   else tagClasses.push('text-bg-secondary');
 
   return (
-    <div className="border mb-2 p-2 d-flex flex-wrap align-items-center justify-content-between">
+    <div className="rounded-3 border mb-2 p-2 d-flex flex-wrap align-items-center justify-content-between">
       <span style={statusStyles} className={statusClasses.join(' ')}></span>
       <span className="p-2">
         {props.user.name}

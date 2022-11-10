@@ -43,8 +43,9 @@ const UserForm: React.FC<Props> = ({onSubmit}) => {
   return (
     <form
       onSubmit={onFormSubmit}
-      className="border border-5 p-2 col"
+      className="border border-2 rounded-3 p-2 col align-self-start sticky-top"
     >
+      <h4 className="text-secondary border-bottom mb-4 py-2 text-center">Add a new user</h4>
       <div className="input-group mb-3">
         <label htmlFor="name" className="input-group-text">Name</label>
         <input
@@ -93,7 +94,7 @@ const UserForm: React.FC<Props> = ({onSubmit}) => {
           onChange={onCheckboxChange}
         />
       </div>
-      <div>
+      <div className="text-center mt-4 pt-2 border-top">
         <button className="btn btn-primary">
           Submit
         </button>
