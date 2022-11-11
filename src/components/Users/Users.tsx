@@ -1,9 +1,9 @@
 import React from 'react';
-import {UserData} from "../../types";
+import {User} from "../../types";
 import UserItem from "./UserItem";
 
 interface Props {
-  userList: UserData[];
+  userList: User[];
 }
 
 const Users: React.FC<Props> = ({userList}) => {

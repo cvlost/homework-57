@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import UserForm from "./components/UserForm/UserForm";
 import Users from "./components/Users/Users";
-import {UserData} from "./types";
+import {User} from "./types";
 
 function App() {
-  const [users, setUsers] = useState<UserData[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
 
-  const onSubmit = (userData: UserData) => {
+  const onSubmit = (userData: User) => {
     setUsers(prev => [...prev, userData]);
   };
 

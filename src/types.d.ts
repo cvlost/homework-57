@@ -1,16 +1,14 @@
-export const ROLES = [
-  'user',
-  'editor',
-  'admin',
-] as const;
-
-export interface UserFields {
+export interface User {
+  id: string;
   name: string;
   email: string;
   isActive: boolean;
-  role: typeof ROLES[number];
+  role: string;
 }
 
-export interface UserData extends UserFields {
-  id: string;
+export interface UserMutation {
+  name: string;
+  email: string;
+  isActive: boolean;
+  role: string;
 }

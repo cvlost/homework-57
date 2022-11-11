@@ -1,20 +1,19 @@
 import React, {useState} from 'react';
-import type {UserFields, UserData} from "../../types";
-import {ROLES} from "../../types";
+import type {User, UserMutation} from "../../types";
 import {uID} from "../../lib/uID";
 
 interface Props {
-  onSubmit: (userData: UserData) => void;
+  onSubmit: (userData: User) => void;
 }
 
 const UserForm: React.FC<Props> = ({onSubmit}) => {
-  const defaultFields: UserFields = {
+  const defaultFields: UserMutation = {
     name: '',
     email: '',
     isActive: false,
-    role: 'user'
+    role: ''
   }
-  const [fields, setFields] = useState<UserFields>({...defaultFields});
+  const [fields, setFields] = useState<UserMutation>({...defaultFields});
 
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,15 +21,11 @@ const UserForm: React.FC<Props> = ({onSubmit}) => {
     setFields(() => ({...defaultFields}))
   };
 
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFields(prev => (
-      {...prev, [e.target.name]: e.target.value}
-    ));
-  };
+  const onChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
+    const {name, value} = e.target;
 
-  const onSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFields(prev => (
-      {...prev, role: e.target.value as typeof ROLES[number]}
+      {...prev, [name]: value}
     ));
   };
 
@@ -54,7 +49,7 @@ const UserForm: React.FC<Props> = ({onSubmit}) => {
           type="text"
           value={fields.name}
           className="form-control"
-          onChange={onInputChange}
+          onChange={onChange}
           required
         />
       </div>
@@ -66,19 +61,21 @@ const UserForm: React.FC<Props> = ({onSubmit}) => {
           type="email"
           value={fields.email}
           className="form-control"
-          onChange={onInputChange}
+          onChange={onChange}
           required
         />
       </div>
       <div className="input-group mb-3">
-        <label htmlFor="role" className="input-group-text">Destiny</label>
+        <label htmlFor="role" className="input-group-text">Role</label>
         <select
           id="role"
           name="role"
           value={fields.role}
           className="form-control"
-          onChange={onSelect}
+          onChange={onChange}
+          required
         >
+          <option disabled value="">Choose user's destiny</option>
           <option value="user">User</option>
           <option value="editor">Editor</option>
           <option value="admin">Admin</option>
